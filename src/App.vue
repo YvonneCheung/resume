@@ -1,18 +1,19 @@
 <template>
   <div id="app">
     <resume />
+    <el-button class="print" type="primary">打印</el-button>
   </div>
 </template>
 
 <script>
-import Resume from "./components/Resume.vue";
+import Resume from './components/Resume.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Resume
   }
-};
+}
 </script>
 
 <style>
@@ -41,5 +42,10 @@ ol {
   text-align: center;
   color: #2c3e50;
   margin: 80px;
+}
+.print {
+  position: fixed;
+  top: 100px;
+  right: 70px;
 }
 </style>
