@@ -9,56 +9,72 @@
         <div class="avatar"></div>
       </div>
       <div class="information" ref="information">
-        <div class="desc pd10">
-          {{ basicInfo.description }}
+        <div class="pd10">
+          <div class="desc">
+            {{ basicInfo.description }}
+          </div>
+          <div class="desc pd10">
+            {{ basicInfo.work }}
+          </div>
         </div>
         <div class="pd10">
-          <span>{{ basicInfo.university }}</span> ——
-          <span>{{ basicInfo.major }}</span>
-          <span>{{ basicInfo.year }}</span>
+          <div>
+            <span>{{ basicInfo.university }}</span> ——
+            <span class="mr10">{{ basicInfo.major }}</span>
+            <span class="mr10">{{ basicInfo.year }}</span>
+          </div>
+          <ul class="contact pd10">
+            <li>
+              <span class="label">Mobile:</span>
+              <span class="content">{{ basicInfo.mobile }}</span>
+            </li>
+            <li>
+              <span class="label">Site:</span>
+              <span class="content">{{ basicInfo.site }}</span>
+            </li>
+            <li>
+              <span class="label">E-mail:</span>
+              <span class="content">{{ basicInfo.email }}</span>
+            </li>
+          </ul>
         </div>
-        <ul class="contact pd10">
-          <li>
-            <span class="label">Mobile:</span>
-            <span class="content">{{ basicInfo.mobile }}</span>
-          </li>
-          <li>
-            <span class="label">Site:</span>
-            <span class="content">{{ basicInfo.site }}</span>
-          </li>
-          <li>
-            <span class="label">E-mail:</span>
-            <span class="content">{{ basicInfo.email }}</span>
-          </li>
-        </ul>
       </div>
 
       <div class="content" ref="content">
         <template v-for="(item, index) in experience">
-          <el-row :gutter="10" :key="index">
-            <el-col :span="4">
-              <div class="header">{{ item.date }}</div>
-              <ul class="content">
+          <el-row :gutter="25" :key="index">
+            <el-col :span="5">
+              <div class="p-header">{{ item.date }}</div>
+              <ul class="p-content">
                 <li v-for="(p, i) in item.program" :key="i">
                   {{ p }}
                 </li>
               </ul>
             </el-col>
-            <el-col :span="8">
-              <div class="header">{{ item.company }}</div>
-              <div class="content">
+            <el-col :span="7">
+              <div class="p-header">{{ item.company }}</div>
+              <div class="p-content">
                 {{ item.desc }}
               </div>
             </el-col>
             <el-col :span="12">
-              <div class="header">{{ item.position }}</div>
-              <div class="content">
-                {{ item.detail }}
-              </div>
+              <div class="p-header">{{ item.position }}</div>
+              <ul class="p-content">
+                <li
+                  v-for="(d, index) in item.detail"
+                  :key="index"
+                  class="mb10"
+                  v-html="d"
+                ></li>
+              </ul>
             </el-col>
           </el-row>
         </template>
       </div>
+      <ul class="skill">
+        <h3>Skills</h3>
+        <li v-for="(item, index) in skill" :key="index">{{ item }}</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -73,7 +89,8 @@ export default {
   data() {
     return {
       basicInfo: Personal.basicInfo,
-      experience: Personal.experience
+      experience: Personal.experience,
+      skill: Personal.skill,
     }
   },
   mounted() {
@@ -84,40 +101,7 @@ export default {
       console.log('超出')
     }
   },
-  methods: {
-    // printOut22() {
-    //   var title = this.teacher
-    //   var that = this
-    //   html2Canvas(document.querySelector('#subOutputRank'), {
-    //     allowTaint: true
-    //   }).then(function(canvas) {
-    //     console.log(canvas.height)
-    //     let contentWidth = canvas.width
-    //     let contentHeight = canvas.height
-    //     let pageHeight = (contentWidth / 592.28) * 841.89
-    //     let leftHeight = contentHeight
-    //     let position = 0
-    //     let imgWidth = 595.28
-    //     let imgHeight = (592.28 / contentWidth) * contentHeight
-    //     let pageData = canvas.toDataURL('image/jpeg', 1.0)
-    //     let PDF = new JsPDF('', 'pt', 'a4')
-    //     if (leftHeight < pageHeight) {
-    //       PDF.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight)
-    //     } else {
-    //       while (leftHeight > 0) {
-    //         PDF.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-    //         leftHeight -= pageHeight
-    //         position -= 842
-    //         if (leftHeight > 0) {
-    //           PDF.addPage()
-    //         }
-    //       }
-    //     }
-    //     PDF.save(title + '.pdf')
-    //     that.dianpingShow = true
-    //   })
-    // }
-  }
+  methods: {},
 }
 </script>
 
@@ -125,16 +109,16 @@ export default {
 <style scoped>
 .resume {
   margin: 0 auto;
-  width: 794px;
-  height: 1123px;
-  background-color: #f7f6f3;
+  width: 863px;
+  height: 1221px;
+  background-color: #fff;
   color: #444;
   font-size: 13px;
   text-align: left;
   display: flex;
 }
 .main {
-  margin: 60px 70px;
+  margin: 0 60px;
 }
 .header {
   display: flex;
@@ -158,22 +142,48 @@ export default {
 .pd10 {
   padding: 10px 0;
 }
+.mt10 {
+  margin-top: 10px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mr10 {
+  display: inline-block;
+  margin-right: 10px;
+}
 .information {
   line-height: 2;
   width: 50%;
 }
-
+.contact {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.contact li {
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+}
 .contact li .label {
   display: inline-block;
   width: 80px;
 }
-.el-row {
+.content {
   margin-top: 40px;
 }
-.el-row .header {
+.content .el-row {
+  margin-bottom: 30px;
+}
+.el-row .p-header {
   font-weight: 600;
 }
-.el-row .content {
+.el-row .p-content {
   margin-top: 10px;
+  line-height: 1.8;
+  font-size: 12px;
+}
+.skill {
+  line-height: 1.8;
 }
 </style>

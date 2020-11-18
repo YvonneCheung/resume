@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <resume />
-    <el-button class="print" type="primary">打印</el-button>
+    <!-- <el-button class="print" type="primary">打印</el-button> -->
   </div>
 </template>
 
@@ -11,8 +11,8 @@ import Resume from './components/Resume.vue'
 export default {
   name: 'App',
   components: {
-    Resume
-  }
+    Resume,
+  },
 }
 </script>
 
@@ -41,8 +41,16 @@ ol {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 80px;
+  letter-spacing: 1.2px;
+  /* margin: 80px; */
 }
+/* h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Yatra-One, sans-serif;
+} */
 .print {
   position: fixed;
   top: 100px;
