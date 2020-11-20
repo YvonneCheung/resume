@@ -15,7 +15,8 @@ module.exports = {
     'no-eval': 'off', // 禁止使用eval
     'no-undef': 'off', // 不能有未定义的变量
     'no-unused-vars': 'off',
-    "prefer-const":"off"
+    "prefer-const":"off",
+    // "comma-dangle": [2, "never"]
   },
   plugins: ['vue', 'prettier'],
   overrides: [

@@ -1,15 +1,15 @@
 <template>
-  <div class="resume">
-    <div class="main" ref="main">
-      <div class="header" ref="header">
-        <div class="name pd10">
+  <div class="content">
+    <div class="content-bd">
+      <header class="content-hd">
+        <div class="name">
           <h1>{{ basicInfo.name }}</h1>
           <span class="en-name">{{ basicInfo.enName }}</span>
         </div>
         <div class="avatar"></div>
-      </div>
-      <div class="information" ref="information">
-        <div class="pd10">
+      </header>
+      <div class="content-info">
+        <div class="info-top">
           <div class="desc">
             {{ basicInfo.description }}
           </div>
@@ -17,7 +17,7 @@
             {{ basicInfo.work }}
           </div>
         </div>
-        <div class="pd10">
+        <div class="info-bottom">
           <div>
             <span>{{ basicInfo.university }}</span> ——
             <span class="mr10">{{ basicInfo.major }}</span>
@@ -25,55 +25,77 @@
           </div>
           <ul class="contact pd10">
             <li>
+              <i class="iconfont icon-phone"></i>
               <span class="label">Mobile:</span>
-              <span class="content">{{ basicInfo.mobile }}</span>
+              <a :href="`tel:${basicInfo.mobile}`" target="_blank">{{
+                basicInfo.mobile
+              }}</a>
             </li>
             <li>
+              <i class="iconfont icon-homepage"></i>
               <span class="label">Site:</span>
-              <span class="content">{{ basicInfo.site }}</span>
+              <a :href="`https://${basicInfo.site}`" target="_blank">{{
+                basicInfo.site
+              }}</a>
             </li>
             <li>
+              <i class="iconfont icon-email"></i>
               <span class="label">E-mail:</span>
-              <span class="content">{{ basicInfo.email }}</span>
+              <a :href="`mailto://${basicInfo.email}`" target="_blank">{{
+                basicInfo.email
+              }}</a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div class="content" ref="content">
-        <template v-for="(item, index) in experience">
-          <el-row :gutter="25" :key="index">
-            <el-col :span="5">
-              <div class="p-header">{{ item.date }}</div>
-              <ul class="p-content">
-                <li v-for="(p, i) in item.program" :key="i">
-                  {{ p }}
+      <ul class="content-skill">
+        <h3>Skills</h3>
+        <li v-for="(item, index) in skill" :key="index">{{ item }}</li>
+      </ul>
+      <div class="content-work">
+        <h3>Work Experience</h3>
+        <div v-for="(item, index) in experience" :key="index" class="work-item">
+          <el-row :gutter="10" class="work">
+            <el-col :span="6">
+              <div>{{ item.date }}</div>
+            </el-col>
+            <el-col :span="10">
+              <div>{{ item.company }}</div>
+            </el-col>
+            <el-col :span="4">{{ item.position }}</el-col>
+          </el-row>
+          <el-row :gutter="10" class="work">
+            <el-col :span="6">
+              <ul v-for="(p, i) in item.program" :key="i">
+                <li>{{ p }}</li>
+              </ul>
+            </el-col>
+            <el-col :span="18">
+              <ul class="program-item">
+                <li v-for="(d, id1) in item.detail" :key="id1" class="pd10">
+                  <label>{{ d.title }}</label>
+                  <ul>
+                    <li v-for="(c, id2) in d.content" :key="id2">
+                      {{ c }}
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </el-col>
-            <el-col :span="7">
-              <div class="p-header">{{ item.company }}</div>
-              <div class="p-content">
-                {{ item.desc }}
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="p-header">{{ item.position }}</div>
-              <ul class="p-content">
-                <li
-                  v-for="(d, index) in item.detail"
-                  :key="index"
-                  class="mb10"
-                  v-html="d"
-                ></li>
-              </ul>
-            </el-col>
           </el-row>
-        </template>
+        </div>
       </div>
-      <ul class="skill">
-        <h3>Skills</h3>
-        <li v-for="(item, index) in skill" :key="index">{{ item }}</li>
+      <ul class="content-personal">
+        <h3>Personal Program</h3>
+        <li v-for="(item, index) in personal" :key="index">
+          <label>{{ item.title }}</label>
+          <ul>
+            <li v-for="(c, i) in item.content" :key="i">
+              {{ c }}
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -91,99 +113,9 @@ export default {
       basicInfo: Personal.basicInfo,
       experience: Personal.experience,
       skill: Personal.skill,
-    }
-  },
-  mounted() {
-    const header = this.$refs.header.clientHeight
-    const information = this.$refs.information.clientHeight
-    const content = this.$refs.content.clientHeight
-    if (header + information + content > this.$refs.main.clientHeight) {
-      console.log('超出')
+      personal: Personal.personal,
     }
   },
   methods: {},
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.resume {
-  margin: 0 auto;
-  width: 863px;
-  height: 1221px;
-  background-color: #fff;
-  color: #444;
-  font-size: 13px;
-  text-align: left;
-  display: flex;
-}
-.main {
-  margin: 0 60px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.name h1 {
-  padding: 10px 0;
-  text-align: left;
-}
-.name .en-name {
-  font-size: 20px;
-}
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  background: url(./../assets/avatar.jpg) top/cover no-repeat;
-}
-
-.pd10 {
-  padding: 10px 0;
-}
-.mt10 {
-  margin-top: 10px;
-}
-.mb10 {
-  margin-bottom: 10px;
-}
-.mr10 {
-  display: inline-block;
-  margin-right: 10px;
-}
-.information {
-  line-height: 2;
-  width: 50%;
-}
-.contact {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-.contact li {
-  flex-shrink: 1;
-  flex-wrap: nowrap;
-}
-.contact li .label {
-  display: inline-block;
-  width: 80px;
-}
-.content {
-  margin-top: 40px;
-}
-.content .el-row {
-  margin-bottom: 30px;
-}
-.el-row .p-header {
-  font-weight: 600;
-}
-.el-row .p-content {
-  margin-top: 10px;
-  line-height: 1.8;
-  font-size: 12px;
-}
-.skill {
-  line-height: 1.8;
-}
-</style>

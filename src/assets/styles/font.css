@@ -1,25 +1,9 @@
 @font-face{
-  font-family: Yesteryear;
-  src: url(./fonts/Yesteryear.ttf);
-  font-weight: bold
+  font-family: PingFang-Regular;
+  src: url(./font/PingFang-Regular.otf);
 }
 @font-face{
-  font-family: Yellowtail;
-  src: url(./fonts/Yellowtail.ttf);
-  font-weight: bold
+  font-family: PingFang-Bold;
+  src: url(./font/PingFang-Bold.otf);
 }
-@font-face{
-  font-family: Yatra-One;
-  src: url(./fonts/Yatra-One.ttf);
-  font-weight: bold
-}
-@font-face{
-  font-family: Poppins;
-  src: url(./fonts/Poppins-Light.ttf);
-  font-weight: bold
-}
-@font-face{
-  font-family: Myriad;
-  src: url(./fonts/MyriadPro-Light.otf);
-  font-weight: bold
-}
+

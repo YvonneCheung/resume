@@ -1,0 +1,32 @@
+// 打印样式
+// 调试方式 Chrome Devtools > Menu > More Tools > Rendering -> Emulate CSS media: print.
+@media print {
+  body {
+    padding-top: 0;
+  }
+
+  .content {
+    width: 1024px;
+    height: 1450px; // A4 大小
+    margin: 0px auto;
+    border-radius: 0;
+    box-shadow: none;
+
+    .el-row {
+      display: flex;
+    }
+
+    .content-bd {
+      padding: 50px
+    }
+
+    .content-info {
+      width: 57%;
+    }
+  }
+
+  .pdf {
+    display: none;
+  }
+
+}
