@@ -39,6 +39,13 @@
               }}</a>
             </li>
             <li>
+              <i class="iconfont icon-github"></i>
+              <span class="label">Github:</span>
+              <a :href="`https://${basicInfo.github}`" target="_blank">{{
+                basicInfo.github
+              }}</a>
+            </li>
+            <li>
               <i class="iconfont icon-email"></i>
               <span class="label">E-mail:</span>
               <a :href="`mailto://${basicInfo.email}`" target="_blank">{{
