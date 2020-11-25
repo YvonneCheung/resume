@@ -88,7 +88,7 @@
       </div>
       <ul class="content-personal">
         <h3>Personal Program</h3>
-        <li v-for="(item, index) in personal" :key="index">
+        <li v-for="(item, index) in personal" :key="index" class="pd10">
           <label>{{ item.title }}</label>
           <ul>
             <li v-for="(c, i) in item.content" :key="i">
